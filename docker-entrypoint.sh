@@ -12,11 +12,11 @@ while :; do
   sleep 1
 done
 
-echo "Using network bridge IP '${NETWORK_BRIDGE_IP}'."
+echo "Found network bridge IP '${NETWORK_BRIDGE_IP}' for network bridge name '${NETWORK_BRIDGE_NAME}'."
 
 cat <<EOF >${BRIDGE_IP_CONFIGMAP_PATH}
-{"apiVersion": "v1","kind": "ConfigMap","metadata": {"name": "${BRIDGE_IP_CONFIGMAP_NAME}", "namespace": "${K8S_NAMESPACE}"},"data": {"bridge-ip": "${NETWORK_BRIDGE_IP}"}}
+NETWORK_BRIDGE_IP=${NETWORK_BRIDGE_IP}
 EOF
 
-echo "Generated config map for network bridge IP."
+echo "Created env file for network bridge IP."
 cat ${BRIDGE_IP_CONFIGMAP_PATH}
